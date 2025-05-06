@@ -6,10 +6,19 @@ import 'package:ai_health/pages/splashscreen.dart';
 import 'package:ai_health/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_health/pages/register.dart';
+import 'package:ai_health/drawer/about.dart';
+import 'package:ai_health/drawer/contact.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'; // ⬅ tambahkan ini
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env"); // ⬅ load .env
   runApp(const MyApp());
 }
+
+// void main() {
+//   runApp(const MyApp());
+// }
 
 final _router = GoRouter(
   initialLocation: '/',
@@ -23,6 +32,16 @@ final _router = GoRouter(
       path: '/Consult',
       name: 'Consult',
       builder: (context, state) => ChatPage(),
+    ),
+    GoRoute(
+      path: '/About',
+      name: 'About',
+      builder: (context, state) => About(),
+    ),
+    GoRoute(
+      path: '/Contact',
+      name: 'Contact',
+      builder: (context, state) => Contact(),
     ),
   ],
   //                                   labelStyle: TextStyle(

@@ -86,10 +86,10 @@ class HomePage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildCardWithIcon('Consult', Icons.favorite, () {
+                        buildCardWithIcon('Consult', Icons.add_moderator, () {
                           context.push('/Consult');
                         }),
-                        buildCardWithIcon('BMI', Icons.star, () {
+                        buildCardWithIcon('BMI', Icons.balance, () {
                           context.push('/BMI');
                         }),
                         buildCardWithIcon('Card 6', Icons.settings, () {
@@ -157,7 +157,6 @@ class HomePage extends StatelessWidget {
               icon: Icons.settings,
               onTap: () {
                 context.push('/Contact');
-                print('Settings clicked');
               },
             ),
 
@@ -165,7 +164,7 @@ class HomePage extends StatelessWidget {
               title: 'About',
               icon: Icons.info,
               onTap: () {
-                print('About clicked');
+                context.pushNamed('About');
               },
             ),
             DrawerItem(

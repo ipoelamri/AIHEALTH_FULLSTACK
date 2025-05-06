@@ -46,7 +46,14 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(title: Text("AI Consult")),
       body: Container(
-        decoration: BoxDecoration(color: AppColors.BgLogo),
+        decoration: BoxDecoration(
+          color: AppColors.BgLogo,
+          image: DecorationImage(
+            image: AssetImage('lib/assets/images/logo.png'),
+            fit: BoxFit.contain,
+            opacity: 0.1,
+          ),
+        ),
         child: Column(
           children: [
             Expanded(
