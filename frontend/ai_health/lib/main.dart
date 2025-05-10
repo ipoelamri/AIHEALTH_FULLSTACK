@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:ai_health/pages/register.dart';
 import 'package:ai_health/drawer/about.dart';
 import 'package:ai_health/drawer/contact.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // ⬅ tambahkan ini
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ai_health/pages/mentalhealth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,11 @@ final _router = GoRouter(
     GoRoute(path: '/Register', builder: (context, state) => const Register()),
     GoRoute(path: '/Home', builder: (context, state) => HomePage()),
     GoRoute(path: '/BMI', name: 'BMI', builder: (context, state) => BMIPage()),
+    GoRoute(
+      path: '/Mental-Health',
+      name: 'MentalHealth',
+      builder: (context, state) => MentalHealthCheckPage(),
+    ),
     GoRoute(
       path: '/Consult',
       name: 'Consult',

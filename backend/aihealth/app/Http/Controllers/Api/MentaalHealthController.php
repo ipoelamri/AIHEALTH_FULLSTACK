@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 class MentaalHealthController extends Controller
 {
     public function check (Request $request){
+        //dd($request->all());
         $validated = $request->validate([
             'answer' => 'required|array|size:5',
             'answer.*' => 'required|in:iya,tidak',
@@ -36,6 +37,7 @@ class MentaalHealthController extends Controller
         }
 
         return response()->json([
+            'success' => true,
             'score' => $score,
             'mood' => $mood,
             'message' => $message

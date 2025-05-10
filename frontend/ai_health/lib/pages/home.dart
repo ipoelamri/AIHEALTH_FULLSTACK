@@ -19,57 +19,70 @@ class HomePage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Color(0xFFF9F7E4)),
         backgroundColor: AppColors.BgLogo,
         centerTitle: true,
+        elevation: 4,
       ),
       body: Container(
         decoration: BoxDecoration(color: Colors.white),
-
         child: Column(
           children: [
             Container(
               height: 250,
               margin: EdgeInsets.all(16),
-              child: StatefulBuilder(
-                builder: (context, setState) {
-                  PageController _pageController = PageController();
-                  int _currentPage = 0;
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 3,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: StatefulBuilder(
+                  builder: (context, setState) {
+                    PageController _pageController = PageController();
+                    int _currentPage = 0;
 
-                  void _autoSlide() {
-                    Future.delayed(Duration(seconds: 3), () {
-                      if (_pageController.hasClients) {
-                        _currentPage = (_currentPage + 1) % 3;
-                        _pageController.animateToPage(
-                          _currentPage,
-                          duration: Duration(milliseconds: 300),
-                          curve: Curves.easeInToLinear,
-                        );
-                        _autoSlide();
-                      }
-                    });
-                  }
+                    void _autoSlide() {
+                      Future.delayed(Duration(seconds: 3), () {
+                        if (_pageController.hasClients) {
+                          _currentPage = (_currentPage + 1) % 3;
+                          _pageController.animateToPage(
+                            _currentPage,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeInToLinear,
+                          );
+                          _autoSlide();
+                        }
+                      });
+                    }
 
-                  _autoSlide();
+                    _autoSlide();
 
-                  return PageView(
-                    controller: _pageController,
-                    children: [
-                      Image.asset(
-                        'lib/assets/images/png1.png',
-                        fit: BoxFit.fitHeight,
-                      ),
-                      Image.asset(
-                        'lib/assets/images/png2.png',
-                        fit: BoxFit.fitHeight,
-                      ),
-                      Image.asset(
-                        'lib/assets/images/png3.png',
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ],
-                  );
-                },
+                    return PageView(
+                      controller: _pageController,
+                      children: [
+                        Image.asset(
+                          'lib/assets/images/png1.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          'lib/assets/images/png2.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          'lib/assets/images/png3.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
-
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -92,8 +105,8 @@ class HomePage extends StatelessWidget {
                         buildCardWithIcon('BMI', Icons.balance, () {
                           context.push('/BMI');
                         }),
-                        buildCardWithIcon('Card 6', Icons.settings, () {
-                          print('Card 6 clicked');
+                        buildCardWithIcon('Mental Health', Icons.settings, () {
+                          context.push('/Mental-Health');
                         }),
                       ],
                     ),
@@ -134,14 +147,6 @@ class HomePage extends StatelessWidget {
                     height: 120,
                   ),
                   SizedBox(height: 10),
-                  // Text(
-                  //   'AI Health',
-                  //   style: TextStyle(
-                  //     color: AppColors.WhiteLogo,
-                  //     fontSize: 24,
-                  //     fontWeight: FontWeight.bold,
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -159,7 +164,6 @@ class HomePage extends StatelessWidget {
                 context.push('/Contact');
               },
             ),
-
             DrawerItem(
               title: 'About',
               icon: Icons.info,
@@ -181,6 +185,44 @@ class HomePage extends StatelessWidget {
                   );
                 }
               },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildCardWithIcon(String title, IconData icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 40, color: AppColors.BgLogo),
+            SizedBox(height: 8),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: AppColors.BgLogo,
+              ),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

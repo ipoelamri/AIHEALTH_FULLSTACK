@@ -20,13 +20,13 @@ class _BMIPageState extends State<BMIPage> {
       setState(() {
         _bmi = weight / ((height / 100) * (height / 100));
         if (_bmi! < 18.5) {
-          _resultMessage = "Underweight";
+          _resultMessage = "Berat badan kurang";
         } else if (_bmi! < 24.9) {
-          _resultMessage = "Normal weight";
+          _resultMessage = "Berat badan normal";
         } else if (_bmi! < 29.9) {
-          _resultMessage = "Overweight";
+          _resultMessage = "Berat badan berlebih";
         } else {
-          _resultMessage = "Obesity";
+          _resultMessage = "Obesitas";
         }
       });
     } else {
