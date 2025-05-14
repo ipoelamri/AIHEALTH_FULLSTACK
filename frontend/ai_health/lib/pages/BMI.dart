@@ -1,5 +1,8 @@
 import 'package:ai_health/commons/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class BMIPage extends StatefulWidget {
   @override
@@ -12,7 +15,10 @@ class _BMIPageState extends State<BMIPage> {
   double? _bmi;
   String _resultMessage = "";
 
-  void _calculateBMI() {
+  final String baseUrl =
+      'http://10.0.2.2:8000/api'; // Sesuaikan dengan API kamu
+
+  void _calculateBMI() async {
     final double? height = double.tryParse(_heightController.text);
     final double? weight = double.tryParse(_weightController.text);
 
@@ -29,10 +35,42 @@ class _BMIPageState extends State<BMIPage> {
           _resultMessage = "Obesitas";
         }
       });
+
+      // Setelah perhitungan selesai, simpan ke database
+      await _saveToDatabase(_bmi!);
     } else {
       setState(() {
         _resultMessage = "Please enter valid values!";
       });
+    }
+  }
+
+  Future<void> _saveToDatabase(double bmi) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? token = prefs.getString('token');
+
+    if (token == null) {
+      print("Token tidak ditemukan");
+      return;
+    }
+
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/update-bmi'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+        body: jsonEncode({'bmi': bmi.toStringAsFixed(2)}),
+      );
+
+      if (response.statusCode == 200) {
+        print("BMI berhasil diupdate di database");
+      } else {
+        print("Gagal mengupdate BMI: ${response.body}");
+      }
+    } catch (e) {
+      print("Terjadi kesalahan koneksi: $e");
     }
   }
 
@@ -42,7 +80,6 @@ class _BMIPageState extends State<BMIPage> {
       appBar: AppBar(title: Text("BMI Calculator")),
       body: Container(
         decoration: BoxDecoration(color: AppColors.BgLogo),
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,

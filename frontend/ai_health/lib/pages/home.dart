@@ -105,20 +105,28 @@ class HomePage extends StatelessWidget {
                         buildCardWithIcon('BMI', Icons.balance, () {
                           context.push('/BMI');
                         }),
-                        buildCardWithIcon('Mental Health', Icons.settings, () {
-                          context.push('/Mental-Health');
-                        }),
+                        buildCardWithIcon(
+                          'Mental Health',
+                          Icons.add_reaction,
+                          () {
+                            context.push('/Mental-Health');
+                          },
+                        ),
                       ],
                     ),
                     SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        buildCardWithIcon('Card 4', Icons.favorite, () {
-                          print('Card 4 clicked');
-                        }),
-                        buildCardWithIcon('Card 5', Icons.star, () {
-                          print('Card 5 clicked');
+                        buildCardWithIcon(
+                          'Virtual Therapist',
+                          Icons.favorite,
+                          () {
+                            context.push('/Virtual-Therapist');
+                          },
+                        ),
+                        buildCardWithIcon('Test', Icons.star, () {
+                          context.push('/Profile');
                         }),
                         buildCardWithIcon('Card 6', Icons.settings, () {
                           print('Card 6 clicked');
@@ -154,7 +162,7 @@ class HomePage extends StatelessWidget {
               title: 'Profile',
               icon: Icons.people,
               onTap: () {
-                print('Profile clicked');
+                context.push('/Profile');
               },
             ),
             DrawerItem(

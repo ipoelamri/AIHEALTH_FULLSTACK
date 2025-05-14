@@ -32,7 +32,7 @@ class MentaalHealthController extends Controller
             $message = 'Tanda-tanda tekanan mental mulai muncul. Luangkan waktu untuk diri sendiri atau bicaralah dengan seseorang.';
 
         }else {
-            $mood = 'Stress Berat';
+            $mood = 'Depresi';
             $message = 'Anda mungkin mengalami kecemasan yang lebih serius. Pertimbangkan untuk berbicara dengan seorang profesional kesehatan mental secepatnya.';
         }
 

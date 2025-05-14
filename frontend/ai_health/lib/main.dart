@@ -1,3 +1,4 @@
+import 'package:ai_health/drawer/profile.dart';
 import 'package:ai_health/pages/BMI.dart';
 import 'package:ai_health/pages/consult.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,7 @@ import 'package:ai_health/drawer/about.dart';
 import 'package:ai_health/drawer/contact.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ai_health/pages/mentalhealth.dart';
+import 'package:ai_health/pages/virtualTherapist.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,11 @@ final _router = GoRouter(
     GoRoute(path: '/Home', builder: (context, state) => HomePage()),
     GoRoute(path: '/BMI', name: 'BMI', builder: (context, state) => BMIPage()),
     GoRoute(
+      path: '/Virtual-Therapist',
+      name: 'VT',
+      builder: (context, state) => VirtualTherapistPage(),
+    ),
+    GoRoute(
       path: '/Mental-Health',
       name: 'MentalHealth',
       builder: (context, state) => MentalHealthCheckPage(),
@@ -48,6 +55,11 @@ final _router = GoRouter(
       path: '/Contact',
       name: 'Contact',
       builder: (context, state) => Contact(),
+    ),
+    GoRoute(
+      path: '/Profile',
+      name: 'Profile',
+      builder: (context, state) => ProfilePage(),
     ),
   ],
   //                                   labelStyle: TextStyle(
