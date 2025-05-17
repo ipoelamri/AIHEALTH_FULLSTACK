@@ -1,6 +1,7 @@
 import 'package:ai_health/commons/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_health/services/mentalHealthService.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class MentalHealthCheckPage extends StatefulWidget {
   @override
@@ -64,9 +65,12 @@ class _MentalHealthCheckPageState extends State<MentalHealthCheckPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mental Health Check"),
-        centerTitle: true,
+        title: Text(
+          "Mental Health Check",
+          style: TextStyle(color: AppColors.WhiteLogo),
+        ),
         backgroundColor: AppColors.BgLogo,
+        iconTheme: IconThemeData(color: AppColors.WhiteLogo),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -87,12 +91,19 @@ class _MentalHealthCheckPageState extends State<MentalHealthCheckPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            _questions[index],
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          Container(
+                            padding: EdgeInsets.all(18),
+                            decoration: BoxDecoration(
                               color: AppColors.BgLogo,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              _questions[index],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.WhiteLogo,
+                              ),
                             ),
                           ),
                           SizedBox(height: 8),

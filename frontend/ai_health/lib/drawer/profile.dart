@@ -1,3 +1,4 @@
+import 'package:ai_health/commons/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_health/services/ProfileService.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,67 +65,82 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profil Anda'),
+        title: Text(
+          'Profil Anda',
+          style: TextStyle(color: AppColors.WhiteLogo),
+        ),
         backgroundColor: Color(0xFF00477b),
+        iconTheme: IconThemeData(color: AppColors.WhiteLogo),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              elevation: 4,
-              margin: EdgeInsets.only(bottom: 16),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Informasi Kesehatan Anda',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+            Center(
+              child: Card(
+                elevation: 4,
+                margin: EdgeInsets.only(bottom: 16),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Informasi Kesehatan Anda',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('BMI:', style: TextStyle(fontSize: 16)),
-                        Text(
-                          _bmi,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('BMI:', style: TextStyle(fontSize: 16)),
+                          Text(
+                            _bmi,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Kondisi Mental:', style: TextStyle(fontSize: 16)),
-                        Text(
-                          _mentalHealth,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Kondisi Mental:',
+                            style: TextStyle(fontSize: 16),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Text(
+                            _mentalHealth,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF00477b),
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF00477b),
+                ),
+                onPressed: fetchData,
+                child: Text(
+                  'Refresh Data',
+                  style: TextStyle(color: AppColors.WhiteLogo),
+                ),
               ),
-              onPressed: fetchData,
-              child: Text('Refresh Data'),
             ),
           ],
         ),

@@ -22,3 +22,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/update-bmi', [UserDataController::class, 'updateBMI']);
     Route::post('/update-mental-health', [UserDataController::class, 'updateMentalHealth']);
 });
+Route::post('/tanya', [GPTKesehatanController::class, 'tanya']);
+Route::post('/therapist', [GPTVirtualTherapistController::class, 'therapist']);

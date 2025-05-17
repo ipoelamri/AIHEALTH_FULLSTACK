@@ -15,8 +15,7 @@ class _BMIPageState extends State<BMIPage> {
   double? _bmi;
   String _resultMessage = "";
 
-  final String baseUrl =
-      'http://10.0.2.2:8000/api'; // Sesuaikan dengan API kamu
+  final String baseUrl = 'http://10.0.2.2:8000/api';
 
   void _calculateBMI() async {
     final double? height = double.tryParse(_heightController.text);
@@ -77,7 +76,13 @@ class _BMIPageState extends State<BMIPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("BMI Calculator")),
+      appBar: AppBar(
+        title: Text(
+          "BMI Calculator",
+          style: TextStyle(color: AppColors.BgLogo),
+        ),
+        iconTheme: IconThemeData(color: AppColors.BgLogo),
+      ),
       body: Container(
         decoration: BoxDecoration(color: AppColors.BgLogo),
         child: Column(

@@ -2,6 +2,7 @@ import 'package:ai_health/commons/constant.dart';
 import 'package:ai_health/services/authservices.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+//import 'package:ai_health/drawer/profile.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -120,13 +121,19 @@ class HomePage extends StatelessWidget {
                       children: [
                         buildCardWithIcon(
                           'Virtual Therapist',
-                          Icons.favorite,
+                          Icons.enhanced_encryption,
                           () {
                             context.push('/Virtual-Therapist');
                           },
                         ),
-                        buildCardWithIcon('Test', Icons.star, () {
+                        buildCardWithIcon('Profile', Icons.account_circle, () {
                           context.push('/Profile');
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => ProfilePage(),
+                          //   ),
+                          // );
                         }),
                         buildCardWithIcon('Card 6', Icons.settings, () {
                           print('Card 6 clicked');

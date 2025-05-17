@@ -44,7 +44,10 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("AI Consult")),
+      appBar: AppBar(
+        title: Text("AI Consult", style: TextStyle(color: AppColors.darkBlue)),
+        iconTheme: IconThemeData(color: AppColors.BgLogo),
+      ),
       body: Container(
         decoration: BoxDecoration(
           color: AppColors.BgLogo,

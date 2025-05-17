@@ -1,3 +1,4 @@
+import 'package:ai_health/commons/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_health/services/virtualTherapistService.dart';
 
@@ -34,10 +35,11 @@ class _VirtualTherapistPageState extends State<VirtualTherapistPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Virtual Therapist'),
-        backgroundColor: Color(0xFF00477b),
-        centerTitle: true,
-        elevation: 0,
+        title: Text(
+          'Virtual Therapist',
+          style: TextStyle(color: AppColors.BgLogo),
+        ),
+        iconTheme: IconThemeData(color: AppColors.BgLogo),
       ),
       body: Container(
         color: Color(0xFF00477b), // Warna solid tanpa gradasi
@@ -46,14 +48,17 @@ class _VirtualTherapistPageState extends State<VirtualTherapistPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Pilih Kondisi Mental Anda:',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+              Center(
+                child: Text(
+                  'Pilih Kondisi Mental Anda:',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
+
               SizedBox(height: 15),
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(
