@@ -20,10 +20,10 @@ class ProfileService {
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        return {'error': true, 'message': 'Gagal mengambil data'};
+        return {'success': false, 'message': 'Gagal mengambil data'};
       }
     } catch (e) {
-      return {'error': true, 'message': 'Terjadi kesalahan koneksi'};
+      return {'success': false, 'message': 'Terjadi kesalahan koneksi'};
     }
   }
 }

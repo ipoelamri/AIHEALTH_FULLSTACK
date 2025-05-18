@@ -2,7 +2,7 @@ import 'package:flutter/material.dart ';
 
 class AppColors {
   static const Color BgLogo = Color(0xFF00477b); // Deep Blue
-  static const Color secondary = Color(0xFF03DAC6); // Teal
+  static const Color Purple = Color.fromARGB(255, 18, 6, 119); // Teal
   static const Color WhiteLogo = Color(0xFFF5F5F5); // Off White
   static const Color textPrimary = Color(
     0xFF000000,
@@ -12,8 +12,11 @@ class AppColors {
   static const Color lightGrey = Color(
     0xFFE0E0E0,
   ); // Complementary to WhiteLogo
-  static const Color darkGrey = Color(
-    0xFFBDBDBD,
+  static const Color darkGrey = Color.fromARGB(
+    255,
+    161,
+    159,
+    159,
   ); // Slightly darker than lightGrey
 }
 

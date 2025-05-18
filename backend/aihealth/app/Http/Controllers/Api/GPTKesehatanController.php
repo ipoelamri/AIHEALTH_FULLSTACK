@@ -23,7 +23,7 @@ class GPTKesehatanController extends Controller
                     
                     [
                         'role' => 'user',
-                        'content' => "Halo Healtman, $pertanyaan"
+                        'content' => "$pertanyaan"
                     ]
                 ]
             ])

@@ -10,14 +10,20 @@ class UserDataController extends Controller
     public function updateBMI(Request $request)
     {
         $request->validate([
-            'bmi' => 'nullable|numeric',
+            'bmi' => 'nullable|string',
+            'height' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'total_bmi' => 'nullable|numeric',
         ]);
 
         $user = Auth::user();
         $user->bmi = $request->bmi;
+        $user->height = $request->height;
+        $user->weight = $request->weight;
+        $user->total_bmi = $request->total_bmi;
         $user->save();
 
-        return response()->json(['message' => 'BMI berhasil diupdate']);
+        return response()->json(['success' => true,'message' => 'BMI berhasil diupdate']);
     }
 
     public function updateMentalHealth(Request $request)
@@ -43,6 +49,9 @@ class UserDataController extends Controller
             'email' => $user->email,
             'bmi' => $user->bmi,
             'mental_health' => $user->mental_health,
+            'height' => $user->height,
+            'weight' => $user->weight,
+            'total_bmi' => $user->total_bmi,
         ]);
     }
 }
