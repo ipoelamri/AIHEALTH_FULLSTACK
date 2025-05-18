@@ -42,6 +42,7 @@ dependencies:
   url_launcher: ^6.3.1
   flutter_dotenv: ^5.2.1
   animations: ^2.0.11
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
     - lib/assets/images/png1.png
     - lib/assets/images/png2.png
     - lib/assets/images/png3.png
+    - lib/assets/images/TheraMan.png
     - lib/assets/images/Doctor.jpg
   #   - images/a_dot_ham.jpeg
 

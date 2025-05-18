@@ -4,6 +4,7 @@ import 'package:ai_health/services/profileservice.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       return 'User';
     }
 
-    _username = response['name'] ?? 'User'; // Simpan hasil ke variabel lokal
+    _username = response['name']; // Simpan hasil ke variabel lokal
     return _username!;
   }
 
@@ -209,25 +210,26 @@ class _HomePageState extends State<HomePage> {
                     _username ?? _getUsername(),
                   ), // Gunakan data lokal jika ada
                   builder: (context, snapshot) {
-                    String greeting = 'Halo, ${_username ?? 'User'}';
-                    // if (snapshot.connectionState == ConnectionState.done &&
-                    //     snapshot.hasData) {
-                    //   greeting = 'Halo, ${_username ?? 'User'}';
-                    // }
+                    String greeting = 'Halo, ${_username ?? 'Selamat Datang'}';
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AnimatedOpacity(
-                          opacity: 1.0,
-                          duration: Duration(milliseconds: 500),
-                          child: Text(
-                            greeting,
-                            style: TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.BgLogo,
+                        AnimatedTextKit(
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              greeting,
+                              textStyle: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.BgLogo,
+                              ),
+                              speed: Duration(
+                                milliseconds: 100,
+                              ), // Kecepatan mengetik
                             ),
-                          ),
+                          ],
+                          repeatForever: true, // Animasi berulang
+                          pause: Duration(seconds: 2), // Jeda sebelum mengulang
                         ),
                         SizedBox(height: 4),
                         Text(
@@ -323,13 +325,22 @@ class _HomePageState extends State<HomePage> {
                     height: 95,
                   ),
                   SizedBox(height: 10),
-                  Text(
-                    'Halo, ${_username ?? 'User'}',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Halo, ${_username ?? 'User'}',
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        speed: Duration(
+                          milliseconds: 100,
+                        ), // Kecepatan mengetik
+                      ),
+                    ],
+                    repeatForever: true, // Animasi berulang
+                    pause: Duration(seconds: 2), // Jeda sebelum mengulang
                   ),
                 ],
               ),
@@ -348,13 +359,7 @@ class _HomePageState extends State<HomePage> {
                 context.push('/Feature');
               },
             ),
-            DrawerItem(
-              title: 'Contact',
-              icon: Icons.contact_mail,
-              onTap: () {
-                context.push('/Contact');
-              },
-            ),
+
             DrawerItem(
               title: 'About',
               icon: Icons.info,
@@ -366,14 +371,70 @@ class _HomePageState extends State<HomePage> {
               title: 'Logout',
               icon: Icons.logout,
               onTap: () async {
-                final authService = AuthService();
-                try {
-                  await authService.logout();
-                  context.go('/Login');
-                } catch (e) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Logout gagal: ${e.toString()}')),
-                  );
+                final shouldLogout = await showDialog<bool>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      title: Row(
+                        children: [
+                          Icon(Icons.logout, color: AppColors.BgLogo),
+                          SizedBox(width: 8),
+                          Text(
+                            'Konfirmasi Logout',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.BgLogo,
+                            ),
+                          ),
+                        ],
+                      ),
+                      content: Text(
+                        'Apakah Anda yakin ingin logout?',
+                        style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false); // Batalkan logout
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: AppColors.BgLogo,
+                            textStyle: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          child: Text('Batal'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true); // Lanjutkan logout
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.BgLogo,
+                            foregroundColor: AppColors.WhiteLogo,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text('Logout'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                if (shouldLogout == true) {
+                  // Lanjutkan proses logout
+                  final authService = AuthService();
+                  try {
+                    await authService.logout();
+                    context.go('/Login');
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Logout gagal: ${e.toString()}')),
+                    );
+                  }
                 }
               },
             ),

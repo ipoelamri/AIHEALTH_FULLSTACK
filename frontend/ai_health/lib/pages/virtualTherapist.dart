@@ -108,23 +108,48 @@ class _VirtualTherapistPageState extends State<VirtualTherapistPage> {
               if (_response.isNotEmpty)
                 Expanded(
                   child: SingleChildScrollView(
-                    child: Card(
-                      color: Colors.white.withOpacity(0.9),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          _response,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF00477b),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Avatar di luar kartu
+                        CircleAvatar(
+                          backgroundImage: AssetImage(
+                            'lib/assets/images/TheraMan.png',
+                          ), // Ganti dengan path gambar pengguna Anda
+                          radius: 20,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.white, // Outline white
+                                width: 2.0,
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.left,
                         ),
-                      ),
+                        SizedBox(width: 12), // Jarak antara avatar dan kartu
+                        // Kartu Respons
+                        Expanded(
+                          child: Card(
+                            color: Colors.white.withOpacity(0.9),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                _response,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xFF00477b),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

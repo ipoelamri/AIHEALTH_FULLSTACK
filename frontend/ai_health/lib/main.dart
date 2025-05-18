@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:ai_health/pages/register.dart';
 import 'package:ai_health/drawer/about.dart';
 import 'package:ai_health/drawer/feature.dart';
-import 'package:ai_health/drawer/contact.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ai_health/pages/mentalhealth.dart';
 import 'package:ai_health/pages/virtualTherapist.dart';
@@ -52,11 +51,6 @@ final _router = GoRouter(
       path: '/About',
       name: 'About',
       builder: (context, state) => About(),
-    ),
-    GoRoute(
-      path: '/Contact',
-      name: 'Contact',
-      builder: (context, state) => Contact(),
     ),
     GoRoute(
       path: '/Profile',

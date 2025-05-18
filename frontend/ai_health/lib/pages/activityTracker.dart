@@ -1,6 +1,8 @@
 // filepath: c:\laragon\www\AIHEALTH FULLSTACK\frontend\ai_health\lib\pages\ActivityTracker.dart
 import 'package:flutter/material.dart';
 import 'package:ai_health/commons/constant.dart';
+import 'dart:convert'; // Untuk encode/decode JSON
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ActivityTrackerPage extends StatefulWidget {
   @override
@@ -13,6 +15,12 @@ class _ActivityTrackerPageState extends State<ActivityTrackerPage> {
   final TextEditingController _activityController = TextEditingController();
   final TextEditingController _durationController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _loadActivitiesFromStorage();
+  }
+
   void _addActivity() {
     final String activity = _activityController.text;
     final String duration = _durationController.text;
@@ -22,12 +30,47 @@ class _ActivityTrackerPageState extends State<ActivityTrackerPage> {
         _activities.add({
           'activity': activity,
           'duration': int.tryParse(duration) ?? 0,
-          'date': DateTime.now(),
+          'date': DateTime.now().toString(),
         });
       });
 
       _activityController.clear();
       _durationController.clear();
+
+      // Simpan data ke local storage
+      _saveActivitiesToStorage();
+    }
+  }
+
+  void _deleteActivity(int index) {
+    setState(() {
+      _activities.removeAt(index);
+    });
+
+    // Simpan perubahan ke local storage
+    _saveActivitiesToStorage();
+  }
+
+  // Fungsi untuk menyimpan data aktivitas ke SharedPreferences
+  Future<void> _saveActivitiesToStorage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String encodedData = jsonEncode(_activities);
+    await prefs.setString('activities', encodedData);
+  }
+
+  // Fungsi untuk memuat data aktivitas dari SharedPreferences
+  Future<void> _loadActivitiesFromStorage() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? encodedData = prefs.getString('activities');
+
+    if (encodedData != null) {
+      final List<dynamic> decodedData = jsonDecode(encodedData);
+      setState(() {
+        _activities.clear();
+        _activities.addAll(
+          decodedData.map((item) => Map<String, dynamic>.from(item)),
+        );
+      });
     }
   }
 
@@ -158,6 +201,10 @@ class _ActivityTrackerPageState extends State<ActivityTrackerPage> {
                           subtitle: Text(
                             'Durasi: ${activity['duration']} menit\nTanggal: ${activity['date'].toString().split(' ')[0]}',
                             style: TextStyle(color: AppColors.lightGrey),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red),
+                            onPressed: () => _deleteActivity(index),
                           ),
                         ),
                       );

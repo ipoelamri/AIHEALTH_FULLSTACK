@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ai_health/services/authservices.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ai_health/commons/constant.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -33,7 +34,56 @@ class _RegisterState extends State<Register> {
     );
 
     if (result['success'] == true) {
-      context.go('/Login');
+      // Tampilkan popup setelah berhasil registrasi
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: Column(
+              children: [
+                Icon(Icons.check_circle, color: AppColors.BgLogo, size: 48),
+                SizedBox(height: 16),
+                Text(
+                  'Registrasi Berhasil',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.BgLogo,
+                  ),
+                ),
+              ],
+            ),
+            content: Text(
+              'Akun Anda berhasil dibuat. Silakan login untuk melanjutkan.',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+            ),
+            actionsAlignment: MainAxisAlignment.center,
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Tutup dialog
+                  context.go('/Login'); // Arahkan ke halaman login
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.BgLogo,
+                  foregroundColor: AppColors.WhiteLogo,
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: Text('Login', style: TextStyle(fontSize: 16)),
+              ),
+            ],
+            backgroundColor: AppColors.WhiteLogo, // Warna latar belakang dialog
+          );
+        },
+      );
     } else {
       final errorMessage = result['message'] ?? 'Terjadi kesalahan';
       ScaffoldMessenger.of(
@@ -46,13 +96,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.blue.shade400, Colors.blue.shade900],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(color: AppColors.BgLogo),
         child: Center(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -184,7 +228,7 @@ class _RegisterState extends State<Register> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue.shade700,
+                                backgroundColor: AppColors.BgLogo,
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 50,
                                   vertical: 15,
