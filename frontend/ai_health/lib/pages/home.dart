@@ -281,7 +281,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         buildCardWithIcon(
-                          'Virtual Therapist',
+                          'V-Therapist',
                           Icons.psychology_alt,
                           () {
                             context.push('/Virtual-Therapist');
@@ -291,9 +291,14 @@ class _HomePageState extends State<HomePage> {
                         buildCardWithIcon('Profile', Icons.account_circle, () {
                           context.push('/Profile');
                         }, color: Colors.teal[50]),
-                        buildCardWithIcon('Settings', Icons.settings, () {
-                          print('Settings clicked');
-                        }, color: Colors.red[50]),
+                        buildCardWithIcon(
+                          'Activ Tracker',
+                          Icons.directions_run,
+                          () {
+                            context.push('/Activity-Tracker');
+                          },
+                          color: Colors.orange[50],
+                        ),
                       ],
                     ),
                   ],
@@ -331,9 +336,16 @@ class _HomePageState extends State<HomePage> {
             ),
             DrawerItem(
               title: 'Profile',
-              icon: Icons.people,
+              icon: Icons.person,
               onTap: () {
                 context.push('/Profile');
+              },
+            ),
+            DrawerItem(
+              title: 'Feature',
+              icon: Icons.featured_play_list,
+              onTap: () {
+                context.push('/Feature');
               },
             ),
             DrawerItem(

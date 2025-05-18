@@ -106,289 +106,289 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       backgroundColor: Color(0xFFF4F8FB),
       appBar: AppBar(
-        title: Text(
-          'Profil Anda',
-          style: TextStyle(color: AppColors.WhiteLogo),
-        ),
-        backgroundColor: Color(0xFF00477b),
-        iconTheme: IconThemeData(color: AppColors.WhiteLogo),
+        title: Text('Profil Anda', style: TextStyle(color: AppColors.BgLogo)),
+        backgroundColor: AppColors.WhiteLogo,
+        iconTheme: IconThemeData(color: AppColors.BgLogo),
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              // Avatar
-              CircleAvatar(
-                radius: 45,
-                backgroundColor: Color(0xFF00477b),
-                child: Icon(Icons.person, color: Colors.white, size: 60),
-              ),
-              SizedBox(height: 16),
-              Text(
-                'Selamat datang, $_name ! ',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF00477b),
+      body: Container(
+        color: AppColors.BgLogo,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                // Avatar
+                CircleAvatar(
+                  radius: 45,
+                  backgroundColor: AppColors.WhiteLogo,
+                  child: Icon(Icons.person, color: AppColors.BgLogo, size: 60),
                 ),
-              ),
-              SizedBox(height: 24),
-              Text(
-                'Silahkan cek data kesehatan Anda',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkGrey,
-                ),
-              ),
-              SizedBox(height: 24),
-              // Card
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                elevation: 6,
-                shadowColor: Color(0x2200477b),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 24,
-                    horizontal: 20,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.person,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Nama',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _name,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(height: 32, thickness: 1.2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.height,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Tinggi Badan (cm)',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _height,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(height: 32, thickness: 1.2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.monitor_weight,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Berat Badan (kg)',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _weight,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(height: 32, thickness: 1.2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.calculate,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Total BMI',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _totalbmi,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(height: 32, thickness: 1.2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.monitor_weight,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'BMI',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _bmi,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(height: 32, thickness: 1.2),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.psychology,
-                            color: Color(0xFF00477b),
-                            size: 32,
-                          ),
-                          SizedBox(width: 16),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Kondisi Mental',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey[700],
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  _mentalHealth,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF00477b),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                SizedBox(height: 16),
+                Text(
+                  'Selamat datang, $_name ! ',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.WhiteLogo,
                   ),
                 ),
-              ),
-              SizedBox(height: 32),
-              // ElevatedButton.icon(
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Color(0xFF00477b),
-              //     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(12),
-              //     ),
-              //     elevation: 2,
-              //   ),
-              //   onPressed: fetchData,
-              //   icon: Icon(Icons.refresh, color: AppColors.WhiteLogo),
-              //   label: Text(
-              //     'Refresh Data',
-              //     style: TextStyle(color: AppColors.WhiteLogo, fontSize: 16),
-              //   ),
-              // ),
-            ],
+                SizedBox(height: 5),
+                Text(
+                  'Silahkan cek data kesehatan Anda',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.lightGrey,
+                  ),
+                ),
+                SizedBox(height: 10),
+                // Card
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  elevation: 6,
+                  shadowColor: Color(0x2200477b),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24,
+                      horizontal: 20,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.person,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Nama',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _name,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 32, thickness: 1.2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.height,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Tinggi Badan (cm)',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _height,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 32, thickness: 1.2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.monitor_weight,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Berat Badan (kg)',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _weight,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 32, thickness: 1.2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.calculate,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Total BMI',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _totalbmi,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 32, thickness: 1.2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.monitor_weight,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'BMI',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _bmi,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(height: 32, thickness: 1.2),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.psychology,
+                              color: Color(0xFF00477b),
+                              size: 32,
+                            ),
+                            SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Kondisi Mental',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.grey[700],
+                                    ),
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    _mentalHealth,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF00477b),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 32),
+                // ElevatedButton.icon(
+                //   style: ElevatedButton.styleFrom(
+                //     backgroundColor: Color(0xFF00477b),
+                //     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //     elevation: 2,
+                //   ),
+                //   onPressed: fetchData,
+                //   icon: Icon(Icons.refresh, color: AppColors.WhiteLogo),
+                //   label: Text(
+                //     'Refresh Data',
+                //     style: TextStyle(color: AppColors.WhiteLogo, fontSize: 16),
+                //   ),
+                // ),
+              ],
+            ),
           ),
         ),
       ),

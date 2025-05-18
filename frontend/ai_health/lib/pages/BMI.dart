@@ -1,8 +1,6 @@
 import 'package:ai_health/commons/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+import 'package:ai_health/services/BMIService.dart';
 
 class BMIPage extends StatefulWidget {
   @override
@@ -12,12 +10,12 @@ class BMIPage extends StatefulWidget {
 class _BMIPageState extends State<BMIPage> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
+  final BMIService _bmiService = BMIService();
+
   double? _bmi;
   String _resultMessage = "";
   double? _height;
   double? _weight;
-
-  final String baseUrl = 'http://10.0.2.2:8000/api';
 
   void _calculateBMI() async {
     final double? height = double.tryParse(_heightController.text);
@@ -49,50 +47,15 @@ class _BMIPageState extends State<BMIPage> {
   }
 
   Future<void> _saveToDatabase(String resultMessage) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? token = prefs.getString('token');
-
-    if (token == null) {
-      print("Token tidak ditemukan");
-      return;
-    }
-
-    try {
-      // Bulatkan nilai height dan weight
-      final int roundedHeight = _height!.toInt();
-      final int roundedWeight = _weight!.toInt();
-
-      print('URL: $baseUrl/update-bmi');
-      print('Token: $token');
-      print(
-        'Data yang dikirim: ${jsonEncode({'bmi': resultMessage, 'height': roundedHeight, 'weight': roundedWeight, 'total_bmi': _bmi})}',
+    if (_height != null && _weight != null && _bmi != null) {
+      await _bmiService.saveBMI(
+        height: _height!,
+        weight: _weight!,
+        totalBMI: _bmi!,
+        resultMessage: resultMessage,
       );
-
-      final response = await http.post(
-        Uri.parse('$baseUrl/update-bmi'),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-        body: jsonEncode({
-          'bmi': resultMessage,
-          'height': roundedHeight, // Gunakan nilai yang sudah dibulatkan
-          'weight': roundedWeight, // Gunakan nilai yang sudah dibulatkan
-          'total_bmi': _bmi,
-        }),
-      );
-
-      if (response.statusCode == 200) {
-        print("BMI berhasil diupdate di database");
-        print('Height: $roundedHeight');
-        print('Weight: $roundedWeight');
-        print('BMI: $_bmi');
-      } else {
-        print('Response error: ${response.statusCode}');
-        print("Gagal mengupdate BMI: ${response.body}");
-      }
-    } catch (e) {
-      print("Terjadi kesalahan koneksi: $e");
+    } else {
+      print("Data tidak valid");
     }
   }
 

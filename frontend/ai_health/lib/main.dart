@@ -8,10 +8,12 @@ import 'package:ai_health/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:ai_health/pages/register.dart';
 import 'package:ai_health/drawer/about.dart';
+import 'package:ai_health/drawer/feature.dart';
 import 'package:ai_health/drawer/contact.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:ai_health/pages/mentalhealth.dart';
 import 'package:ai_health/pages/virtualTherapist.dart';
+import 'package:ai_health/pages/activityTracker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +62,16 @@ final _router = GoRouter(
       path: '/Profile',
       name: 'Profile',
       builder: (context, state) => ProfilePage(),
+    ),
+    GoRoute(
+      path: '/Activity-Tracker',
+      name: 'ActivityTracker',
+      builder: (context, state) => ActivityTrackerPage(),
+    ),
+    GoRoute(
+      path: '/Feature',
+      name: 'Feature',
+      builder: (context, state) => FeaturePage(),
     ),
   ],
   //                                   labelStyle: TextStyle(
